@@ -6,7 +6,7 @@ import { setIsPaymentLoading } from "../../slices/courseSlice";
 import { resetCart } from "../../slices/cartSlice";
 
 
-const RAZORPAY_KEY = "rzp_test_oOFU7XhhW8zTgz";
+const RAZORPAY_KEY = process.env.RAZORPAY_KEY;
 const {
     COURSE_CAPTURE_PAYMENT_API,
     COURSE_VERIFY_PAYMENT_API,

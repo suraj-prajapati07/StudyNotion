@@ -1,5 +1,4 @@
-// const BASE_URL = "http://localhost:4000/api/v1";
-const BASE_URL = "https://studynotion-aexu.onrender.com"
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 // CATAGORIES API
 export const categories = {
