@@ -25,12 +25,20 @@ cloudinaryConnect();
 app.use(express.json());
 app.use(cookieParser());
 app.use(
-	cors({
-		origin:["http://localhost:3000","https://study-notion-nine-roan.vercel.app"],
-		credentials:true,
-		optionSuccessStatus:200,
-	})
-)
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://study-notion-nine-roan.vercel.app"
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+// preflight support
+app.options("*", cors());
+
 app.use(
 	fileUpload({
 		useTempFiles:true,
