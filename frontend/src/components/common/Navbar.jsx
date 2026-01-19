@@ -10,6 +10,8 @@ import { BsChevronDown } from "react-icons/bs";
 import {apiConnector} from "../../services/apiConnector"
 import { categories } from "../../services/apis";
 import ProfileDropDown from "../core/Auth/ProfileDropDown";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { ImCross } from "react-icons/im";
 
 const Navbar = () => {
 
@@ -54,7 +56,7 @@ const Navbar = () => {
 
     }, []);
 
-
+    const[isOpen, setIsOpen] = useState(false);
 
     return(
         <div className="bg-richblack-800 h-14 border-b-[1px] border-b-richblack-700 flex items-center">
@@ -149,7 +151,7 @@ const Navbar = () => {
                         token === null && (
                             <Link to={"/login"}>
                                 <button 
-                                    className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 uppercase"
+                                    className="hidden lg:block rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 uppercase"
                                 >
                                     Log in
                                 </button>
@@ -161,7 +163,7 @@ const Navbar = () => {
                         token === null && (
                             <Link to={"/signup"}>
                                 <button 
-                                    className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 uppercase"
+                                    className="hidden lg:block rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 uppercase"
                                 >
                                     Sign up
                                 </button>
@@ -174,7 +176,109 @@ const Navbar = () => {
                             <ProfileDropDown/>
                         )
                     }
-                    
+
+                    {/* ----------------Mobile view ---------------------*/}
+                    {/* Hamburger */}
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className='lg:hidden'
+                    >
+                        {
+                            !isOpen? <GiHamburgerMenu fontSize={20}/> : <ImCross fontSize={20}/>
+                        }
+                    </button>
+                    {isOpen && (
+                        <div
+                            className='bg-richblack-500 lg:hidden p-2  absolute right-1 
+                            top-[3.2rem] z-100 rounded-md'
+                        >
+                            <ul className="flex flex-col gap-y-6 text-richblack-25">
+                                {NavbarLinks.map((ele, index) => {
+                                    return(
+                                        <li 
+                                            key={index}
+                                            className="uppercase tracking-wider"
+                                        >    
+                                            {
+                                                ele.title === "Catalog"? 
+                                                (<div className="relative flex items-center gap-2 group cursor-pointer">
+                                                    <p>{ele.title}</p>
+                                                    <BsChevronDown/>
+
+                                                    {/* Drop-down sublinks container */}
+                                                    <div className="z-[100] w-[200px] lg:w-[300px] flex flex-col invisible absolute left-[50%] top-[50%] translate-x-[-70%] translate-y-[3em]
+                                                    rounded-md bg-richblack-5 text-richblack-900 p-2 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em]"
+                                                    >
+                                                        <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5">
+                                                        </div>
+
+                                                        {//-->sublinks data (catalog data)...
+                                                            subLinks?.length > 0? (
+                                                                subLinks.map((subLink, index)=> {
+                                                                    return(
+                                                                        <Link
+                                                                        className="bg-transparent py-4 pl-4 rounded-lg   hover:bg-richblack-50"
+                                                                        key={index} 
+                                                                        to={`/catalog/${subLink.name.split(" ")
+                                                                            .join('-')
+                                                                            .toLowerCase()
+                                                                            }`
+                                                                        }
+                                                                        onClick={() => setIsOpen(false)}   
+                                                                        >
+                                                                            {subLink.name}
+                                                                        </Link>
+                                                                    )
+                                                                })
+                                                            ) : 
+                                                            (
+                                                                <p className="text-center capitalize">
+                                                                    No Courses Found
+                                                                </p>
+                                                            )
+                                                        }
+                                                    </div>
+                                                    
+                                                </div>) :(
+                                                    <Link 
+                                                        to={ele?.path}
+                                                        className={`${matchRoute(ele?.path)? "text-yellow-25" : "text-richblack-25"
+                                                        }`}
+                                                        onClick={() => setIsOpen(false)}
+                                                    >
+                                                    {ele.title}
+                                                </Link>
+                                                )
+                                            }
+                                        </li>
+                                    )
+                                })}
+                                {/* //login and signup btn */}
+                                {token === null && (
+                                    <Link to={"/login"}>
+                                        <button 
+                                            className="uppercase tracking-wider"
+                                            onClick={() => setIsOpen(false)}
+                                        >
+                                            Log in
+                                        </button>
+                                    </Link>
+                                    )
+                                }
+                                {token === null && (
+                                    <Link to={"/signup"}>
+                                        <button 
+                                            className="uppercase tracking-wider"
+                                            onClick={() => setIsOpen(false)}
+                                        >
+                                            Sign up
+                                        </button>
+                                    </Link>
+                                    )
+                                }
+                            </ul>
+                        </div>)
+                    }
                 </div>
             </div>
         </div>
