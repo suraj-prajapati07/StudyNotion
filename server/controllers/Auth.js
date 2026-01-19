@@ -202,6 +202,9 @@ exports.login = async (req, res) => {
 				token,
 				user,
 				message: `User Login Success`,
+                httpOnly: true,
+                secure: true,      // REQUIRED on https
+                sameSite: "none",  // REQUIRED for cross-origin
 			});
 		} 
         else{
