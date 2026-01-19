@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
 	cors({
-		origin:"*",
+		origin:["http://localhost:3000","https://study-notion-nine-roan.vercel.app"],
 		credentials:true,
 		optionSuccessStatus:200,
 	})
