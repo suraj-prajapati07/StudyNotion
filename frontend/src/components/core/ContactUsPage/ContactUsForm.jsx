@@ -113,7 +113,7 @@ const ContactUsForm = () => {
                 <div className="flex items-center gap-5">
                     {/* country code */}
                     <select
-                        defaultValue={CountryCode.find(obj => obj?.code === '+91')}
+                        defaultValue={'+91'}
                         name="countryCode"
                         className="form-style w-[81px]"
                         {...register("countryCode", { required: true })}

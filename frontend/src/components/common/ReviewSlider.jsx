@@ -33,17 +33,17 @@ const ReviewSlider = () => {
                     delay:2500,
                     disableOnInteraction: false,
                 }}
-                className="w-full"
+                className="relative w-full "
             >
                 {reviews?.map((review, index) => (
                     <SwiperSlide key={index}>
-                        <div className="bg-richblack-800 p-4 text-richblack-25 rounded-lg flex flex-col justify-between min-h-[200px]">
+                        <div className="bg-richblack-800 p-2 md:p-4 text-richblack-25 rounded-lg flex flex-col justify-between  h-[250px]">
                             <div className="flex items-center gap-4">
                                 <img
                                     src={review?.user?.image ? review?.user?.image : 
                                         `https://api.dicebear.com/9.x/initials/svg?seed=${review?.user?.firstName[0]}${review?.user?.lastName[0]}`}
                                     alt="profile pic"
-                                    className="h-12 w-12 rounded-full object-cover"
+                                    className="h-12 w-12 rounded-full aspect-square object-cover"
                                 />
                                 <div className="flex flex-col">
                                     <h1 className="font-semibold text-richblack-5">
@@ -55,7 +55,7 @@ const ReviewSlider = () => {
                                 </div> 
                             </div>
                             {/* Review */}
-                            <p className="font-medium text-richblack-25">
+                            <p className="text-sm md:text-xl font-medium text-richblack-25">
                                 {review?.review?.split(" ").length < truncateWords ? `${review?.review}`
                                     : `${review.review.split(" ").slice(0, truncateWords).join(" ")}...`
                                 }

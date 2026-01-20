@@ -203,7 +203,7 @@ const VideoSection = () => {
                             {!completedLecture?.includes(videoData?._id) && (
                                 <button
                                     onClick={lectureCompletedHandler}
-                                    className='bg-yellow-100 text-sm text-richblack-900 absolute top-[20%] hover:scale-90 z-20 font-medium md:text-[18px] px-4 py-2 rounded-md transition-transform duration-300'
+                                    className='bg-yellow-50 text-sm text-richblack-700 absolute top-2 hover:scale-90 z-20 font-medium md:text-[18px] px-4 py-2 rounded-full transition-transform duration-300'
                                 >
                                     Mark as Completed
                                 </button>
@@ -244,7 +244,7 @@ const VideoSection = () => {
 
             {/* video title and desc */}
             <div className='mt-5'>
-                <h1 className='text-2xl font-bold text-richblack-25'>{videoData?.title}</h1>
+                <h1 className='text-xl md:text-2xl font-bold text-richblack-25'>{videoData?.title}</h1>
                 <p className='text-gray-500 text-richblack-100'>{videoData?.description}</p>
             </div>
         </div>

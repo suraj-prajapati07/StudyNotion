@@ -20,7 +20,7 @@ const contactDetails = [
         icon: IoCall,
         heading: "Call us",
         description: "Mon - Fri From 8am to 5pm",
-        details: "+91 8210628682",
+        details: "+91 9372994063",
     },
 
 ]
